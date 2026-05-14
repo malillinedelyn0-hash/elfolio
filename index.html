@@ -498,14 +498,31 @@
       align-items: center;
       gap: 2.25rem;
       box-shadow: var(--shadow-sm);
-      max-width: 580px;
+      max-width: 620px;
       transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cert-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--pink-deep), var(--pink-soft));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
     }
 
     .cert-card:hover {
       box-shadow: var(--shadow-md);
       transform: translateY(-3px);
+      border-color: rgba(181,0,79,0.25);
     }
+
+    .cert-card:hover::after { transform: scaleX(1); }
 
     .cert-icon {
       width: 60px; height: 60px;
@@ -542,6 +559,17 @@
       padding: 0.25rem 0.7rem;
       border-radius: 20px;
       border: 1px solid rgba(181,0,79,0.2);
+    }
+
+    .cert-view-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+      font-size: 0.72rem;
+      color: var(--pink-mid);
+      font-weight: 600;
+      letter-spacing: 0.3px;
     }
 
     /* ── PROJECTS ── */
@@ -948,7 +976,6 @@
       <div class="section-divider"></div>
     </div>
 
-    <!-- Tabs -->
     <div class="skills-tabs reveal reveal-d1">
       <button class="skills-tab active" onclick="switchTab('tech', this)">Technical Skills</button>
       <button class="skills-tab" onclick="switchTab('soft', this)">Non-Technical Skills</button>
@@ -961,14 +988,14 @@
       <div class="skill-item reveal reveal-d3"><div class="skill-icon">🌐</div><span class="skill-name">Web-Based System Documentation</span></div>
       <div class="skill-item reveal reveal-d1"><div class="skill-icon">🔍</div><span class="skill-name">Systems Analysis and Design</span></div>
       <div class="skill-item reveal reveal-d2"><div class="skill-icon">📝</div><span class="skill-name">Research Documentation Writing</span></div>
-      <div class="skill-item reveal reveal-d3"><div class="skill-icon">🌐</div><span class="skill-name">Basic Networking & Subnetting</span></div>
+      <div class="skill-item reveal reveal-d3"><div class="skill-icon">🔗</div><span class="skill-name">Basic Networking &amp; Subnetting</span></div>
       <div class="skill-item reveal reveal-d1"><div class="skill-icon">📊</div><span class="skill-name">Power BI Data Visualization</span></div>
       <div class="skill-item reveal reveal-d2"><div class="skill-icon">📅</div><span class="skill-name">Appointment Scheduling System</span></div>
       <div class="skill-item reveal reveal-d3"><div class="skill-icon">📚</div><span class="skill-name">Library Attendance Monitoring System</span></div>
       <div class="skill-item reveal reveal-d1"><div class="skill-icon">📋</div><span class="skill-name">Requirements Gathering</span></div>
       <div class="skill-item reveal reveal-d2"><div class="skill-icon">💼</div><span class="skill-name">Microsoft Office Tools</span></div>
-      <div class="skill-item reveal reveal-d3"><div class="skill-icon">☁️</div><span class="skill-name">Basic Cloud & IoT Knowledge</span></div>
-      <div class="skill-item reveal reveal-d1"><div class="skill-icon">📂</div><span class="skill-name">Data Encoding & Record Management</span></div>
+      <div class="skill-item reveal reveal-d3"><div class="skill-icon">☁️</div><span class="skill-name">Basic Cloud &amp; IoT Knowledge</span></div>
+      <div class="skill-item reveal reveal-d1"><div class="skill-icon">📂</div><span class="skill-name">Data Encoding &amp; Record Management</span></div>
     </div>
 
     <!-- Non-Technical Skills Panel -->
@@ -983,8 +1010,8 @@
       <div class="skill-item"><div class="skill-icon">✅</div><span class="skill-name">Responsibility</span></div>
       <div class="skill-item"><div class="skill-icon">🧠</div><span class="skill-name">Critical Thinking</span></div>
       <div class="skill-item"><div class="skill-icon">👑</div><span class="skill-name">Leadership</span></div>
-      <div class="skill-item"><div class="skill-icon">📖</div><span class="skill-name">Patience & Willingness to Learn</span></div>
-      <div class="skill-item"><div class="skill-icon">📄</div><span class="skill-name">Documentation & Reporting</span></div>
+      <div class="skill-item"><div class="skill-icon">📖</div><span class="skill-name">Patience &amp; Willingness to Learn</span></div>
+      <div class="skill-item"><div class="skill-icon">📄</div><span class="skill-name">Documentation &amp; Reporting</span></div>
     </div>
   </div>
 </div>
@@ -996,12 +1023,15 @@
     <h2 class="section-title">Professional Certificate</h2>
     <div class="section-divider"></div>
   </div>
-  <div class="cert-card reveal reveal-d1">
+
+  <!-- Clickable cert card opens modal -->
+  <div class="cert-card reveal reveal-d1" onclick="openModal(['assets/nc2.jpg'], 'National Certificate II in IT', 'Issued by TESDA — Technical Education and Skills Development Authority. Valid until June 18, 2029.')">
     <div class="cert-icon">🎓</div>
     <div>
       <div class="cert-title">National Certificate II in IT</div>
       <div class="cert-school">Philippine College of Science and Technology</div>
       <span class="cert-badge">Valid through 2029</span>
+      <div class="cert-view-hint">🔍 Click to view certificate</div>
     </div>
   </div>
 </div>
@@ -1017,11 +1047,11 @@
 
     <div class="project-card reveal reveal-d1" onclick="openModal(
       ['assets/Payroll/payroll_dashboard.jpg','assets/Payroll/payroll_employees.jpg','assets/Payroll/payroll_process.jpg','assets/Payroll/payroll_reports.jpg','assets/Payroll/payroll_settings.jpg'],
-      'Sales & Profitability Dashboard for a Pastry Business',
+      'Sales &amp; Profitability Dashboard for a Pastry Business',
       'Microsoft Excel, Charts, Basic Formula, Basic Forecasting.'
     )">
       <div class="project-tag">Excel-Based</div>
-      <h3>Sales & Profitability Dashboard for a Pastry Business</h3>
+      <h3>Sales &amp; Profitability Dashboard for a Pastry Business</h3>
       <p>Microsoft Excel, Charts, Basic Formula, Basic Forecasting.</p>
       <div class="project-arrow">→</div>
     </div>
@@ -1029,28 +1059,28 @@
     <div class="project-card reveal reveal-d2" onclick="openModal(
       ['assets/alams1.jpg','assets/alam2.jpg','assets/alam3.jpg','assets/alam4.jpg','assets/alam5.jpg','assets/alam6.jpg','assets/alam7.jpg','assets/alam8.jpg'],
       'Automated Library Attendance Monitoring System using QR Code',
-      'Automating the attendance monitoring of students, faculty, and staffs when entering the library to  enhance accuracy, save significant time, and prevent fraud.'
+      'Automating the attendance monitoring of students, faculty, and staffs when entering the library to enhance accuracy, save significant time, and prevent fraud.'
     )">
-      <div class="project-tag">QR- Code based Attendance Monitoring</div>
+      <div class="project-tag">QR-Code based Attendance Monitoring</div>
       <h3>Automated Library Attendance Monitoring System using QR Code</h3>
-      <p>Automating the attendance monitoring of students, faculty, and staffs when entering the library to  enhance accuracy, save significant time, and prevent fraud.</p>
+      <p>Automating the attendance monitoring of students, faculty, and staffs when entering the library to enhance accuracy, save significant time, and prevent fraud.</p>
       <div class="project-arrow">→</div>
     </div>
 
     <div class="project-card reveal reveal-d3" onclick="openModal(
       [],
-      'Pastry Business Sales & Insights Dashboard (Power BI)',
-      'To Track sales performance, identify best-selling products, monitor profit, understand customer trends, and make smarter business decisions..'
+      'Pastry Business Sales &amp; Insights Dashboard (Power BI)',
+      'To track sales performance, identify best-selling products, monitor profit, understand customer trends, and make smarter business decisions.'
     )">
-      <div class="project-tag">Excel and Power Bi</div>
-      <h3>Pastry Business Sales & Insights Dashboard (Power BI)</h3>
-      <p>To Track sales performance, identify best-selling products, monitor profit, understand customer trends, and make smarter business decisions.</p>
+      <div class="project-tag">Excel and Power BI</div>
+      <h3>Pastry Business Sales &amp; Insights Dashboard (Power BI)</h3>
+      <p>To track sales performance, identify best-selling products, monitor profit, understand customer trends, and make smarter business decisions.</p>
       <div class="project-arrow">→</div>
     </div>
 
     <div class="project-card reveal reveal-d4" onclick="openModal(
       ['assets/libanalytics1.jpg','assets/libanalytics2.jpg','assets/libanalytics3.jpg','assets/libanalytics4.jpg'],
-      'Library Attendance Analytics Dashboard (QR-Based System',
+      'Library Attendance Analytics Dashboard (QR-Based System)',
       'Analyzed attendance data from a QR-based library system using Power BI to identify usage trends and improve operational decisions.'
     )">
       <div class="project-tag">Power BI</div>
