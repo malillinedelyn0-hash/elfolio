@@ -18,9 +18,9 @@
   (function(){
   var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
   s1.async=true;
-  s1.src='https://embed.tawk.to/6a02cd809226831c3819bdf5/1jodf50m4';
+  s1.src='https://embed.tawk.to/6a056eb83b1c091c31d3d9d5/1joijh0m2';
   s1.charset='UTF-8';
-  s1.setAttribute('crossorigin','anonymous');
+  s1.setAttribute('crossorigin','*');
   s0.parentNode.insertBefore(s1,s0);
   })();
   </script>
@@ -71,7 +71,7 @@
     }
 
     .nav.scrolled {
-      background: rgba(255,250,248,0.93);
+      background: rgba(255,250,248,0.97);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(181,0,79,0.1);
       padding: 0.85rem 4rem;
@@ -85,6 +85,7 @@
       color: var(--pink-deep);
       text-decoration: none;
       letter-spacing: 0.5px;
+      flex-shrink: 0;
     }
 
     .nav-links {
@@ -115,6 +116,66 @@
 
     .nav-links a:hover { color: var(--pink-deep); }
     .nav-links a:hover::after { width: 100%; }
+
+    /* hamburger — hidden on desktop */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--pink-deep);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* mobile nav drawer */
+    .nav-drawer {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255,250,248,0.98);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+
+    .nav-drawer.open { display: flex; }
+
+    .nav-drawer a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-size: 1.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .nav-drawer a:hover { color: var(--pink-deep); }
+
+    .nav-drawer-close {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      background: var(--pink-pale);
+      border: none;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      color: var(--pink-deep);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
     /* ── HERO ── */
     .hero {
@@ -740,7 +801,7 @@
       z-index: 2000;
       align-items: center;
       justify-content: center;
-      padding: 2rem;
+      padding: 1rem;
       backdrop-filter: blur(8px);
     }
 
@@ -750,7 +811,7 @@
       padding: 2.5rem;
       max-width: 860px;
       width: 100%;
-      max-height: 88vh;
+      max-height: 90vh;
       overflow-y: auto;
       position: relative;
       animation: modalIn 0.35s cubic-bezier(0.34,1.56,0.64,1);
@@ -776,6 +837,7 @@
       align-items: center;
       justify-content: center;
       transition: all 0.3s ease;
+      z-index: 10;
     }
 
     .modal-close:hover {
@@ -865,32 +927,168 @@
       border-radius: 6px;
     }
 
-    /* ── RESPONSIVE ── */
+    /* ════════════════════════════════
+       RESPONSIVE — TABLET (≤900px)
+    ════════════════════════════════ */
     @media (max-width: 900px) {
-      .hero { grid-template-columns:1fr; padding:7rem 2rem 3rem; text-align:center; gap:2.5rem; }
-      .hero-photo-wrap { order:-1; }
-      .hero-photo-frame { width:240px; height:290px; }
-      .hero-badge { right:-8px; bottom:18px; }
-      .hero-desc { margin:0 auto 2.5rem; }
-      .hero-cta { justify-content:center; }
-      .eyebrow { justify-content:center; }
-      .about-grid { grid-template-columns:1fr; gap:2.5rem; }
-      .contact-grid { grid-template-columns:1fr; gap:2rem; }
-      .skills-grid-tech { grid-template-columns:repeat(2,1fr); }
-      .skills-grid-soft { grid-template-columns:repeat(2,1fr); }
-      .project-grid { grid-template-columns:1fr; }
-      .section-wrap { padding:4rem 2rem; }
-      .nav { padding:1rem 2rem; }
-      .nav.scrolled { padding:0.8rem 2rem; }
+      /* NAV */
+      .nav { padding: 1rem 1.5rem; }
+      .nav.scrolled { padding: 0.8rem 1.5rem; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+
+      /* HERO — single column, photo on top */
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding: 6rem 1.5rem 3rem;
+        text-align: center;
+        gap: 3rem;
+      }
+
+      .hero-line { display: none; }
+
+      .hero-photo-wrap { order: -1; }
+
+      .hero-photo-frame {
+        width: 220px;
+        height: 270px;
+        margin: 0 auto;
+      }
+
+      .hero-photo-frame::before {
+        top: 12px; right: -12px;
+      }
+
+      .hero-photo-frame::after {
+        width: 70px; height: 70px;
+        bottom: -10px; left: -10px;
+      }
+
+      .hero-badge {
+        right: -10px;
+        bottom: 16px;
+        padding: 0.75rem 1rem;
+        min-width: 110px;
+      }
+
+      .badge-value { font-size: 1.1rem; }
+
+      .eyebrow { justify-content: center; }
+      .hero h1 { font-size: 2.8rem; }
+      .hero-desc { margin: 0 auto 2rem; font-size: 0.92rem; }
+      .hero-cta { justify-content: center; }
+
+      /* SECTIONS */
+      .section-wrap { padding: 3.5rem 1.5rem; }
+
+      /* ABOUT */
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-stats { grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+      /* SKILLS */
+      .skills-grid-tech { grid-template-columns: repeat(2, 1fr); }
+      .skills-grid-soft { grid-template-columns: repeat(2, 1fr); }
+
+      /* PROJECTS */
+      .project-grid { grid-template-columns: 1fr; }
+
+      /* CONTACT */
+      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+      /* MODAL */
+      .modal-content { padding: 2rem 1.25rem; }
+      .modal-content h3 { font-size: 1.4rem; }
     }
 
+    /* ════════════════════════════════
+       RESPONSIVE — MOBILE (≤560px)
+    ════════════════════════════════ */
     @media (max-width: 560px) {
-      .nav-links { gap:1rem; }
-      .nav-links a { font-size:0.75rem; }
-      .about-stats { grid-template-columns:1fr 1fr; }
+      /* NAV */
+      .nav { padding: 0.9rem 1.25rem; }
+      .nav.scrolled { padding: 0.75rem 1.25rem; }
+      .nav-logo { font-size: 1.15rem; }
+
+      /* HERO */
+      .hero { padding: 5.5rem 1.25rem 2.5rem; gap: 2rem; }
+
+      .hero-photo-frame {
+        width: 180px;
+        height: 220px;
+      }
+
+      .hero-badge {
+        right: -6px;
+        bottom: 12px;
+        padding: 0.6rem 0.85rem;
+        min-width: 100px;
+      }
+
+      .badge-label { font-size: 0.6rem; }
+      .badge-value { font-size: 1rem; }
+
+      .hero h1 { font-size: 2.2rem; }
+      .hero-desc { font-size: 0.88rem; }
+
+      .btn-primary, .btn-outline {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.8rem;
+        width: 100%;
+        text-align: center;
+      }
+
+      .hero-cta { flex-direction: column; gap: 0.75rem; }
+
+      /* SECTIONS */
+      .section-wrap { padding: 3rem 1.25rem; }
+      .section-title { font-size: 1.75rem; }
+
+      /* ABOUT STATS */
+      .about-stats { grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+      .stat-number { font-size: 1.8rem; }
+      .stat-label { font-size: 0.72rem; }
+      .stat-card { padding: 1.1rem; }
+
+      /* SKILLS */
+      .skills-grid-tech { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+      .skills-grid-soft { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+      .skill-item { padding: 0.85rem 0.9rem; gap: 0.6rem; }
+      .skill-name { font-size: 0.75rem; }
+      .skill-icon { width: 30px; height: 30px; font-size: 0.85rem; }
+
+      /* CERTIFICATE */
+      .cert-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.75rem 1.5rem;
+        gap: 1.25rem;
+        max-width: 100%;
+      }
+
+      /* PROJECTS */
+      .project-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .project-card { padding: 1.5rem 1.5rem 2.5rem; }
+      .project-card h3 { font-size: 1.2rem; }
+
+      /* CONTACT */
+      .contact-item { padding: 1rem 1.1rem; }
+      .contact-value { font-size: 0.82rem; }
+
+      /* MODAL */
+      .modal { padding: 0.75rem; }
+      .modal-content { padding: 1.5rem 1rem; border-radius: 12px; }
+      .modal-content h3 { font-size: 1.25rem; padding-right: 2rem; }
+    }
+
+    /* ════════════════════════════════
+       RESPONSIVE — SMALL (≤380px)
+    ════════════════════════════════ */
+    @media (max-width: 380px) {
+      .hero h1 { font-size: 1.9rem; }
+      .hero-photo-frame { width: 155px; height: 190px; }
       .skills-grid-tech,
-      .skills-grid-soft { grid-template-columns:1fr 1fr; }
-      .hero-photo-frame { width:200px; height:245px; }
+      .skills-grid-soft { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -906,7 +1104,20 @@
     <li><a href="#certificate">Certificate</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="nav-drawer" id="navDrawer">
+  <button class="nav-drawer-close" onclick="closeDrawer()">✕</button>
+  <a href="#about" onclick="closeDrawer()">About</a>
+  <a href="#skills" onclick="closeDrawer()">Skills</a>
+  <a href="#projects" onclick="closeDrawer()">Projects</a>
+  <a href="#certificate" onclick="closeDrawer()">Certificate</a>
+  <a href="#contact" onclick="closeDrawer()">Contact</a>
+</div>
 
 <!-- HERO -->
 <div class="hero" id="home">
@@ -981,7 +1192,6 @@
       <button class="skills-tab" onclick="switchTab('soft', this)">Non-Technical Skills</button>
     </div>
 
-    <!-- Technical Skills Panel -->
     <div class="skills-panel active skills-grid skills-grid-tech" id="panel-tech">
       <div class="skill-item reveal reveal-d1"><div class="skill-icon">🗄️</div><span class="skill-name">Database Management (SQL, MySQL)</span></div>
       <div class="skill-item reveal reveal-d2"><div class="skill-icon">📱</div><span class="skill-name">QR Code System Development</span></div>
@@ -998,7 +1208,6 @@
       <div class="skill-item reveal reveal-d1"><div class="skill-icon">📂</div><span class="skill-name">Data Encoding &amp; Record Management</span></div>
     </div>
 
-    <!-- Non-Technical Skills Panel -->
     <div class="skills-panel skills-grid skills-grid-soft" id="panel-soft">
       <div class="skill-item"><div class="skill-icon">🗣️</div><span class="skill-name">Communication Skills</span></div>
       <div class="skill-item"><div class="skill-icon">⏰</div><span class="skill-name">Time Management</span></div>
@@ -1023,8 +1232,6 @@
     <h2 class="section-title">Professional Certificate</h2>
     <div class="section-divider"></div>
   </div>
-
-  <!-- Clickable cert card opens modal -->
   <div class="cert-card reveal reveal-d1" onclick="openModal(['assets/nc2.jpg'], 'National Certificate II in IT', 'Issued by TESDA — Technical Education and Skills Development Authority. Valid until June 18, 2029.')">
     <div class="cert-icon">🎓</div>
     <div>
@@ -1156,6 +1363,17 @@
     navbar.classList.toggle('scrolled', window.scrollY > 40);
   });
 
+  /* ── HAMBURGER MENU ── */
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('navDrawer').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  function closeDrawer() {
+    document.getElementById('navDrawer').classList.remove('open');
+    document.body.style.overflow = 'auto';
+  }
+
   /* ── SMOOTH NAV ── */
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
@@ -1180,7 +1398,7 @@
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
@@ -1247,18 +1465,5 @@
     gtag('event', 'github_click', { event_category: 'engagement', event_label: 'GitHub Profile Click' });
   });
 </script>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6a056eb83b1c091c31d3d9d5/1joijh0m2';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
 </body>
 </html>
