@@ -117,6 +117,7 @@
     .nav-links a:hover { color: var(--pink-deep); }
     .nav-links a:hover::after { width: 100%; }
 
+    /* hamburger — hidden on desktop */
     .nav-hamburger {
       display: none;
       flex-direction: column;
@@ -135,6 +136,7 @@
       transition: all 0.3s ease;
     }
 
+    /* mobile nav drawer */
     .nav-drawer {
       display: none;
       position: fixed;
@@ -401,18 +403,6 @@
       margin-top: 1rem;
     }
 
-    /* ── KEYWORD HIGHLIGHT ── */
-    .highlight {
-      display: inline;
-      background: linear-gradient(120deg, rgba(181,0,79,0.12) 0%, rgba(240,98,146,0.12) 100%);
-      color: var(--pink-deep);
-      font-weight: 700;
-      padding: 0.1rem 0.5rem;
-      border-radius: 4px;
-      border-bottom: 2px solid rgba(181,0,79,0.3);
-      white-space: nowrap;
-    }
-
     /* ── ABOUT ── */
     .about-grid {
       display: grid;
@@ -432,6 +422,44 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1.25rem;
+    }
+
+    .stat-card {
+      background: white;
+      border: 1px solid rgba(181,0,79,0.1);
+      border-radius: 8px;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: linear-gradient(to bottom, var(--pink-deep), var(--pink-soft));
+    }
+
+    .stat-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+    }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--pink-deep);
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      font-weight: 500;
     }
 
     /* ── SKILLS ── */
@@ -899,15 +927,17 @@
       border-radius: 6px;
     }
 
-    /* ════════════════════════════
-       TABLET (≤900px)
-    ════════════════════════════ */
+    /* ════════════════════════════════
+       RESPONSIVE — TABLET (≤900px)
+    ════════════════════════════════ */
     @media (max-width: 900px) {
+      /* NAV */
       .nav { padding: 1rem 1.5rem; }
       .nav.scrolled { padding: 0.8rem 1.5rem; }
       .nav-links { display: none; }
       .nav-hamburger { display: flex; }
 
+      /* HERO — single column, photo on top */
       .hero {
         grid-template-columns: 1fr;
         min-height: auto;
@@ -917,17 +947,31 @@
       }
 
       .hero-line { display: none; }
+
       .hero-photo-wrap { order: -1; }
 
       .hero-photo-frame {
-        width: 220px; height: 270px;
+        width: 220px;
+        height: 270px;
         margin: 0 auto;
       }
 
-      .hero-photo-frame::before { top: 12px; right: -12px; }
-      .hero-photo-frame::after { width: 70px; height: 70px; bottom: -10px; left: -10px; }
+      .hero-photo-frame::before {
+        top: 12px; right: -12px;
+      }
 
-      .hero-badge { right: -10px; bottom: 16px; padding: 0.75rem 1rem; min-width: 110px; }
+      .hero-photo-frame::after {
+        width: 70px; height: 70px;
+        bottom: -10px; left: -10px;
+      }
+
+      .hero-badge {
+        right: -10px;
+        bottom: 16px;
+        padding: 0.75rem 1rem;
+        min-width: 110px;
+      }
+
       .badge-value { font-size: 1.1rem; }
 
       .eyebrow { justify-content: center; }
@@ -935,30 +979,55 @@
       .hero-desc { margin: 0 auto 2rem; font-size: 0.92rem; }
       .hero-cta { justify-content: center; }
 
+      /* SECTIONS */
       .section-wrap { padding: 3.5rem 1.5rem; }
+
+      /* ABOUT */
       .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .about-stats { grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+      /* SKILLS */
       .skills-grid-tech { grid-template-columns: repeat(2, 1fr); }
       .skills-grid-soft { grid-template-columns: repeat(2, 1fr); }
+
+      /* PROJECTS */
       .project-grid { grid-template-columns: 1fr; }
+
+      /* CONTACT */
       .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+      /* MODAL */
       .modal-content { padding: 2rem 1.25rem; }
       .modal-content h3 { font-size: 1.4rem; }
     }
 
-    /* ════════════════════════════
-       MOBILE (≤560px)
-    ════════════════════════════ */
+    /* ════════════════════════════════
+       RESPONSIVE — MOBILE (≤560px)
+    ════════════════════════════════ */
     @media (max-width: 560px) {
+      /* NAV */
       .nav { padding: 0.9rem 1.25rem; }
       .nav.scrolled { padding: 0.75rem 1.25rem; }
       .nav-logo { font-size: 1.15rem; }
 
+      /* HERO */
       .hero { padding: 5.5rem 1.25rem 2.5rem; gap: 2rem; }
-      .hero-photo-frame { width: 180px; height: 220px; }
-      .hero-badge { right: -6px; bottom: 12px; padding: 0.6rem 0.85rem; min-width: 100px; }
+
+      .hero-photo-frame {
+        width: 180px;
+        height: 220px;
+      }
+
+      .hero-badge {
+        right: -6px;
+        bottom: 12px;
+        padding: 0.6rem 0.85rem;
+        min-width: 100px;
+      }
+
       .badge-label { font-size: 0.6rem; }
       .badge-value { font-size: 1rem; }
+
       .hero h1 { font-size: 2.2rem; }
       .hero-desc { font-size: 0.88rem; }
 
@@ -971,20 +1040,24 @@
 
       .hero-cta { flex-direction: column; gap: 0.75rem; }
 
+      /* SECTIONS */
       .section-wrap { padding: 3rem 1.25rem; }
       .section-title { font-size: 1.75rem; }
 
+      /* ABOUT STATS */
       .about-stats { grid-template-columns: 1fr 1fr; gap: 0.85rem; }
       .stat-number { font-size: 1.8rem; }
       .stat-label { font-size: 0.72rem; }
       .stat-card { padding: 1.1rem; }
 
+      /* SKILLS */
       .skills-grid-tech { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
       .skills-grid-soft { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
       .skill-item { padding: 0.85rem 0.9rem; gap: 0.6rem; }
       .skill-name { font-size: 0.75rem; }
       .skill-icon { width: 30px; height: 30px; font-size: 0.85rem; }
 
+      /* CERTIFICATE */
       .cert-card {
         flex-direction: column;
         text-align: center;
@@ -993,23 +1066,24 @@
         max-width: 100%;
       }
 
+      /* PROJECTS */
       .project-grid { grid-template-columns: 1fr; gap: 1rem; }
       .project-card { padding: 1.5rem 1.5rem 2.5rem; }
       .project-card h3 { font-size: 1.2rem; }
 
+      /* CONTACT */
       .contact-item { padding: 1rem 1.1rem; }
       .contact-value { font-size: 0.82rem; }
 
+      /* MODAL */
       .modal { padding: 0.75rem; }
       .modal-content { padding: 1.5rem 1rem; border-radius: 12px; }
       .modal-content h3 { font-size: 1.25rem; padding-right: 2rem; }
-
-      .highlight { white-space: normal; }
     }
 
-    /* ════════════════════════════
-       SMALL PHONES (≤380px)
-    ════════════════════════════ */
+    /* ════════════════════════════════
+       RESPONSIVE — SMALL (≤380px)
+    ════════════════════════════════ */
     @media (max-width: 380px) {
       .hero h1 { font-size: 1.9rem; }
       .hero-photo-frame { width: 155px; height: 190px; }
@@ -1077,13 +1151,32 @@
     <div class="about-text reveal">
       <div class="section-header">
         <div class="eyebrow">About Me</div>
-        <h2 class="section-title">Turning Ideas into<br>Structured Experiences</h2>
+        <h2 class="section-title">Turning Data into<br>Meaningful Insights</h2>
         <div class="section-divider"></div>
       </div>
-      <p>I'm someone who enjoys finding patterns in chaos and turning ideas into structured digital experiences. As an IT student, I've learned that technology is more than coding — it's about understanding people, improving processes, and designing solutions that make everyday tasks easier.</p>
-      <p>My work reflects who I am — detail-oriented, adaptable, and always curious. I believe good systems are not only functional but also meaningful to the people using them. From <span class="highlight">System Analysis</span> to <span class="highlight">Data Visualization</span> and user-focused design, I aim to create outputs that are both efficient and impactful.</p>
-      <p>I'm currently exploring opportunities in business analysis, technology solutions, and digital innovation — continuously improving my skills in <span class="highlight">Dashboard Design</span>, <span class="highlight">Documentation</span>, and <span class="highlight">Problem Solving</span>.</p>
+      <p>Passionate about uncovering patterns, solving problems, and transforming raw information into impactful stories that create real value.</p>
+      <p>Dedicated to building clean, efficient, and user-centered digital solutions that make a difference in how organizations operate and make decisions.</p>
     </div>
+    <div class="about-stats reveal reveal-d2">
+      <div class="stat-card">
+        <div class="stat-number">4+</div>
+        <div class="stat-label">Projects Completed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">NC II</div>
+        <div class="stat-label">Certified in IT</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">12+</div>
+        <div class="stat-label">Technical Skills</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">2029</div>
+        <div class="stat-label">Certificate Valid</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- SKILLS -->
 <div class="skills-section" id="skills">
