@@ -284,6 +284,30 @@
       transform: translateY(-2px);
     }
 
+    .btn-resume {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.85rem 2rem;
+      background: rgba(181,0,79,0.06);
+      color: var(--pink-deep);
+      text-decoration: none;
+      font-size: 0.83rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border-radius: 3px;
+      border: 2px solid rgba(181,0,79,0.2);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-resume:hover {
+      background: var(--pink-pale);
+      border-color: var(--pink-deep);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
     /* ── PHOTO ── */
     .hero-photo-wrap {
       position: relative;
@@ -397,7 +421,7 @@
       margin-top: 1rem;
     }
 
-    /* ── KEYWORD HIGHLIGHT ── */
+    /* ── HIGHLIGHT ── */
     .highlight {
       display: inline;
       background: linear-gradient(120deg, rgba(181,0,79,0.12) 0%, rgba(240,98,146,0.12) 100%);
@@ -495,9 +519,7 @@
       transition: all 0.3s ease;
     }
 
-    .think-card:hover .think-icon {
-      background: var(--pink-deep);
-    }
+    .think-card:hover .think-icon { background: var(--pink-deep); }
 
     .think-icon svg {
       width: 22px; height: 22px;
@@ -509,9 +531,7 @@
       transition: stroke 0.3s ease;
     }
 
-    .think-card:hover .think-icon svg {
-      stroke: white;
-    }
+    .think-card:hover .think-icon svg { stroke: white; }
 
     .think-title {
       font-family: 'Cormorant Garamond', serif;
@@ -585,15 +605,8 @@
     .skills-panel { display: none; }
     .skills-panel.active { display: grid; }
 
-    .skills-grid-tech {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.1rem;
-    }
-
-    .skills-grid-soft {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.1rem;
-    }
+    .skills-grid-tech { grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+    .skills-grid-soft { grid-template-columns: repeat(4, 1fr); gap: 1.1rem; }
 
     .skill-item {
       display: flex;
@@ -1036,7 +1049,6 @@
 
       .hero-line { display: none; }
       .hero-photo-wrap { order: -1; }
-
       .hero-photo-frame { width: 220px; height: 270px; margin: 0 auto; }
       .hero-photo-frame::before { top: 12px; right: -12px; }
       .hero-photo-frame::after { width: 70px; height: 70px; bottom: -10px; left: -10px; }
@@ -1071,7 +1083,15 @@
       .badge-value { font-size: 1rem; }
       .hero h1 { font-size: 2.2rem; }
       .hero-desc { font-size: 0.88rem; }
-      .btn-primary, .btn-outline { padding: 0.75rem 1.5rem; font-size: 0.8rem; width: 100%; text-align: center; }
+
+      .btn-primary, .btn-outline, .btn-resume {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.8rem;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
+
       .hero-cta { flex-direction: column; gap: 0.75rem; }
 
       .section-wrap { padding: 3rem 1.25rem; }
@@ -1079,6 +1099,7 @@
 
       .think-grid { grid-template-columns: 1fr; }
       .think-card { padding: 1.4rem; }
+      .think-quote p { font-size: 1.1rem; }
 
       .skills-grid-tech { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
       .skills-grid-soft { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
@@ -1100,7 +1121,6 @@
       .modal-content h3 { font-size: 1.25rem; padding-right: 2rem; }
 
       .highlight { white-space: normal; }
-      .think-quote p { font-size: 1.1rem; }
     }
 
     /* ════════════ SMALL (≤380px) ════════════ */
@@ -1152,6 +1172,7 @@
     <div class="hero-cta">
       <a href="#projects" class="btn-primary">View My Work</a>
       <a href="#contact" class="btn-outline">Get In Touch</a>
+      <a href="assets/el_resume.pdf" download="Edelyn_Malillin_Resume.pdf" class="btn-resume">↓ Download Resume</a>
     </div>
   </div>
 
@@ -1191,7 +1212,6 @@
     </div>
 
     <div class="think-grid">
-
       <div class="think-card reveal reveal-d1">
         <div class="think-number">01</div>
         <div class="think-icon">
@@ -1236,13 +1256,11 @@
         <div class="think-title">Improve the Experience</div>
         <div class="think-desc">Successful technology is not just about working correctly — it should also feel intuitive, accessible, and helpful for the people using it.</div>
       </div>
-
     </div>
 
     <div class="think-quote reveal">
-      <p>"I don’t just build systems — I build solutions people can actually connect with."</p>
+      <p>"Good systems solve problems. Great systems improve experiences."</p>
     </div>
-
   </div>
 </div>
 
@@ -1400,6 +1418,13 @@
           <div class="contact-value">github.com/malillinedelyn0-hash</div>
         </div>
       </a>
+      <a href="assets/el_resume.pdf" download="Edelyn_Malillin_Resume.pdf" class="contact-item">
+        <div class="contact-item-icon">📄</div>
+        <div>
+          <div class="contact-label">Resume</div>
+          <div class="contact-value">Download my CV</div>
+        </div>
+      </a>
     </div>
   </div>
 </div>
@@ -1425,13 +1450,11 @@
 </div>
 
 <script>
-  /* ── NAVBAR SCROLL ── */
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 40);
   });
 
-  /* ── HAMBURGER ── */
   document.getElementById('hamburger').addEventListener('click', () => {
     document.getElementById('navDrawer').classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -1442,7 +1465,6 @@
     document.body.style.overflow = 'auto';
   }
 
-  /* ── SMOOTH NAV ── */
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const target = document.querySelector(a.getAttribute('href'));
@@ -1450,7 +1472,6 @@
     });
   });
 
-  /* ── SKILLS TAB ── */
   function switchTab(panel, btn) {
     document.querySelectorAll('.skills-panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.skills-tab').forEach(b => b.classList.remove('active'));
@@ -1458,7 +1479,6 @@
     btn.classList.add('active');
   }
 
-  /* ── SCROLL REVEAL ── */
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1470,7 +1490,6 @@
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  /* ── MODAL ── */
   const modal = document.getElementById('modal');
   const modalImg = document.getElementById('modalImg');
   const modalTitle = document.getElementById('modalTitle');
@@ -1525,7 +1544,6 @@
     }
   });
 
-  /* ── ANALYTICS ── */
   document.getElementById('contactBtn').addEventListener('click', () => {
     gtag('event', 'contact_button_click', { event_category: 'engagement', event_label: 'Email Contact Click' });
   });
