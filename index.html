@@ -87,14 +87,14 @@
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 1.75rem;
       list-style: none;
     }
 
     .nav-links a {
       text-decoration: none;
       color: var(--text-mid);
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       font-weight: 500;
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -648,6 +648,98 @@
       line-height: 1.3;
     }
 
+    /* ── ACHIEVEMENTS ── */
+    .achievements-section {
+      background: white;
+      border-top: 1px solid rgba(181,0,79,0.08);
+      border-bottom: 1px solid rgba(181,0,79,0.08);
+    }
+
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .achievement-card {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(181,0,79,0.1);
+      border-radius: 16px;
+      padding: 1.75rem;
+      box-shadow: 0 4px 24px rgba(181,0,79,0.06);
+      transition: all 0.35s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .achievement-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--pink-deep), var(--pink-soft));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+
+    .achievement-card:hover {
+      box-shadow: 0 8px 40px rgba(181,0,79,0.12);
+      transform: translateY(-4px);
+      border-color: rgba(181,0,79,0.2);
+      background: white;
+    }
+
+    .achievement-card:hover::before { transform: scaleX(1); }
+
+    .achievement-icon {
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      background: var(--pink-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .achievement-card:hover .achievement-icon {
+      background: var(--pink-deep);
+    }
+
+    .achievement-year {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--pink-mid);
+      background: var(--pink-pale);
+      padding: 0.22rem 0.65rem;
+      border-radius: 20px;
+      border: 1px solid rgba(181,0,79,0.15);
+      width: fit-content;
+    }
+
+    .achievement-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.35;
+    }
+
+    .achievement-org {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
     /* ── CERTIFICATE ── */
     .cert-card {
       background: rgba(255,255,255,0.8);
@@ -1064,6 +1156,7 @@
       .think-grid { grid-template-columns: repeat(2, 1fr); }
       .skills-grid-tech { grid-template-columns: repeat(2, 1fr); }
       .skills-grid-soft { grid-template-columns: repeat(2, 1fr); }
+      .achievements-grid { grid-template-columns: repeat(2, 1fr); }
       .project-grid { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
       .modal-content { padding: 2rem 1.25rem; }
@@ -1107,6 +1200,9 @@
       .skill-name { font-size: 0.75rem; }
       .skill-icon { width: 30px; height: 30px; font-size: 0.85rem; }
 
+      .achievements-grid { grid-template-columns: 1fr; }
+      .achievement-card { padding: 1.4rem; }
+
       .cert-card { flex-direction: column; text-align: center; padding: 1.75rem 1.5rem; gap: 1.25rem; max-width: 100%; }
 
       .project-grid { grid-template-columns: 1fr; gap: 1rem; }
@@ -1140,6 +1236,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="#think">How I Think</a></li>
     <li><a href="#skills">Skills</a></li>
+    <li><a href="#achievements">Achievements</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#certificate">Certificate</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -1155,6 +1252,7 @@
   <a href="#about" onclick="closeDrawer()">About</a>
   <a href="#think" onclick="closeDrawer()">How I Think</a>
   <a href="#skills" onclick="closeDrawer()">Skills</a>
+  <a href="#achievements" onclick="closeDrawer()">Achievements</a>
   <a href="#projects" onclick="closeDrawer()">Projects</a>
   <a href="#certificate" onclick="closeDrawer()">Certificate</a>
   <a href="#contact" onclick="closeDrawer()">Contact</a>
@@ -1307,6 +1405,63 @@
       <div class="skill-item"><div class="skill-icon">👑</div><span class="skill-name">Leadership</span></div>
       <div class="skill-item"><div class="skill-icon">📖</div><span class="skill-name">Patience &amp; Willingness to Learn</span></div>
       <div class="skill-item"><div class="skill-icon">📄</div><span class="skill-name">Documentation &amp; Reporting</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ACHIEVEMENTS -->
+<div class="achievements-section" id="achievements">
+  <div class="section-wrap" style="border-top:none;">
+    <div class="section-header reveal">
+      <div class="eyebrow">Recognition</div>
+      <h2 class="section-title">Achievements &amp; Awards</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="achievements-grid">
+
+      <div class="achievement-card reveal reveal-d1">
+        <div class="achievement-icon">🏆</div>
+        <span class="achievement-year">2018 – 2019</span>
+        <div class="achievement-title">Champion of Group Debate</div>
+        <div class="achievement-org">Malasiqui Catholic School</div>
+      </div>
+
+      <div class="achievement-card reveal reveal-d2">
+        <div class="achievement-icon">🎖️</div>
+        <span class="achievement-year">2021 – 2022</span>
+        <div class="achievement-title">TVL Representative</div>
+        <div class="achievement-org">Supreme Secondary Learner Government · Malasiqui Catholic School</div>
+      </div>
+
+      <div class="achievement-card reveal reveal-d3">
+        <div class="achievement-icon">⭐</div>
+        <span class="achievement-year">2021 – 2022</span>
+        <div class="achievement-title">Dean's Lister</div>
+        <div class="achievement-org">Philippine College of Science and Technology</div>
+      </div>
+
+      <div class="achievement-card reveal reveal-d1">
+        <div class="achievement-icon">🖊️</div>
+        <span class="achievement-year">2024 – 2025</span>
+        <div class="achievement-title">Secretary — CCSSC Officer</div>
+        <div class="achievement-org">Philippine College of Science and Technology</div>
+      </div>
+
+      <div class="achievement-card reveal reveal-d2">
+        <div class="achievement-icon">💡</div>
+        <span class="achievement-year">2024</span>
+        <div class="achievement-title">TOPCIT Participant</div>
+        <div class="achievement-org">Test of Practical Competency in IT · National Assessment</div>
+      </div>
+
+      <div class="achievement-card reveal reveal-d3">
+        <div class="achievement-icon">⭐</div>
+        <span class="achievement-year">2025 – 2026</span>
+        <div class="achievement-title">Dean's Lister</div>
+        <div class="achievement-org">Philippine College of Science and Technology</div>
+      </div>
+
     </div>
   </div>
 </div>
